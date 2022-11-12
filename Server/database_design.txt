@@ -1,0 +1,25 @@
+// Collections
+1.User
+2.Messages
+3.Channels
+
+// Schema
+1. User {
+    name,
+    password
+    email,
+    profilePic,
+    addedOn
+}
+
+2. Channel{
+    user[email,name,profilePic],
+    addedOn,
+    messages[message Schema]
+}
+
+3.Message{
+    senderID,
+    message
+    addedOn
+}

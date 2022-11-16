@@ -45,7 +45,8 @@ userSchema.static({
     findOneDataAndUpdate: function (findObj, updateObj) {
         return this.findOneAndUpdate(findObj, updateObj, {
             upsert: true,
-            setDefaultsOnInsert: true
+            setDefaultsOnInsert: true,
+            new: true // To return modified document ...
         });
     }
 });

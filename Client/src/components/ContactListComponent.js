@@ -1,13 +1,13 @@
 import { ContactItem } from "./ContactItem"
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { AppContext } from "../App";
 import { ChatContext } from "./Home";
 
 export const ContactListComponent = () => {
     const navigate = useNavigate();
-    const { contactList, setContactList } = useContext(ChatContext); // to display current selected conversation.
+    const { contactList, setContactList, editProfile, setEditProfile, userProfilePic } = useContext(ChatContext); // to display current selected conversation.
     const [searchedUser, setSearchedUser] = useState(""); // To store searched user ...
     const { setLogIn, setLoggedInUserData, loggedInUserData, socketConnection } = useContext(AppContext);
 
@@ -64,12 +64,6 @@ export const ContactListComponent = () => {
         }
     }
 
-    // Change Profile Pic 🖌️
-    const editProfilePic = () => {
-        // Display Edit Profile Pic component 
-        navigate("/editProfilePic");
-    }
-
     // Email Validation 📧
     const validateEmail = (email) => {
         return String(email)
@@ -114,12 +108,14 @@ export const ContactListComponent = () => {
             setSearchedUser("");
         }
     }
+
     return (
         <div id="contactListComponent">
 
             <div id="profileInfo">
                 {/* Profile Pic 🔴*/}
-                <img src={loggedInUserData.profilePic} alt={loggedInUserData.name + `'s profile pic`} id="myProfileImage" onClick={editProfilePic} />
+                {userProfilePic.includes("cdn") ? <img src={loggedInUserData.profilePic} alt={loggedInUserData.name + `'s profile pic`} id="myProfileImage" onClick={() => setEditProfile(!editProfile)} /> : <img src={"http://localhost:4000/Profile_Pics/"+userProfilePic} alt={loggedInUserData.name + `'s profile pic`} id="myProfileImage" onClick={() => setEditProfile(!editProfile)} />}
+
                 <p id="myName">{loggedInUserData.name}</p>
                 <p id="logout" onClick={logout}>Logout</p>
             </div>

@@ -12,20 +12,30 @@ import * as userCntl from "./Controllers/userController.js";
 import * as channelCntl from "./Controllers/channelController.js";
 import * as messageCntl from "./Controllers/messageController.js";
 import * as Validation from "./Utility/validation.js";
-import {resolve} from "path";
+import path from "path";
+import fileUpload from 'express-fileupload';
+import {fileURLToPath} from 'url';
 
 const app = new express();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 // Middlewares 🚩
-app.use(express.json()); // parse application/json
-app.use(express.urlencoded({ extended: true })); // parse application/x-www-form-urlencoded
-app.use(compression(9)); // Compression of data to speed up our Express app’s performance. 🔥
-// The values range from 0 (no compression) to 9 (highest level of compression).
-app.use(cookieParser()); // Parse Cookie header and populate req.cookies with an object keyed by the cookie names.
+
 app.use(cors({
     origin: 'http://localhost:3000', // Allowed domains to communicate with our api
     credentials: true
 })
 ); // To allow our front-end to make requests to our API server ..
+
+// To serve public files
+app.use("/Profile_Pics", express.static(path.join(__dirname,"Public/Profile_Pics")));
+app.use(express.json()); // parse application/json
+app.use(express.urlencoded({ extended: true })); // parse application/x-www-form-urlencoded
+app.use(fileUpload()); // To parse and access uploaded file with req.files
+app.use(compression(9)); // Compression of data to speed up our Express app’s performance. 🔥
+// The values range from 0 (no compression) to 9 (highest level of compression).
+app.use(cookieParser()); // Parse Cookie header and populate req.cookies with an object keyed by the cookie names.
 
 // Set up Global configuration access
 dotenv.config();
@@ -132,3 +142,5 @@ app.post("/conversation", authMiddleware, Validation.conversationValidate, getCo
 app.post("/createChannel", Validation.createChannelValidate, channelCntl.createChannel);
 // Send messages
 app.post("/sendMessage", Validation.sendMessageValidate, messageCntl.sendMessage);
+// Upload/Update Profile Pic
+app.patch("/updateProfilePic", authMiddleware, userCntl.updateProfilePic);

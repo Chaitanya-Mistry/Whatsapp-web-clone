@@ -14,7 +14,6 @@ export const ConversationComponent = () => {
     const { loggedInUserData, socketConnection } = useContext(AppContext); // To get logged in user's details
     const extractedMessages = [];
     const [currentChannelID, setCurrentChannelID] = useState(""); // To store current channel's id 
-    const navigate = useNavigate();
 
     // Update Message UI 
     const updateMessageList = (latestMessage) => {
@@ -245,7 +244,8 @@ export const ConversationComponent = () => {
             {/* Friend Profile Header */}
             <div id="friendProfileInfo">
                 {/* Profile Pic 🔴*/}
-                <img src={selectedFriend.profilePic} alt={selectedFriend.name + "profile pic"} id="friendProfileImage" />
+                {selectedFriend.profilePic.includes("cdn") ? <img src={selectedFriend.profilePic} alt={selectedFriend.name + "profile pic"} id="friendProfileImage" /> : <img src={"http://localhost:4000/Profile_Pics/"+selectedFriend.profilePic} alt={selectedFriend.name + "profile pic"} id="friendProfileImage" /> }
+              
                 <span id="friendName">{selectedFriend.name}</span>
             </div>
 

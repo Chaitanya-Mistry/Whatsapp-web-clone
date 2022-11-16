@@ -15,12 +15,12 @@ function App() {
   const [isLoggedIn, setLogIn] = useState();
   const [loggedInUserData, setLoggedInUserData] = useState("");
   const [socketConnection, setSocketConnection] = useState("");
-  //Register this logged in user to the socket server ®️
+  // Register this logged in user to the socket server ®️
   // Establish connection with Socket.IO
   // Check jason web token on inital render to keep user logged in 🧐
   useEffect(() => {
     if (document.cookie.includes('jwtoken')) {
-      // Create socket instance again because user may refresh their page due to which socket connection will be lost 🧐
+      // Create socket instance again because user may refresh their page as a result socket connection will be lost 🧐
       const socketServerEndPoint = "http://localhost:4000"; // Socket.IO Server Endpoint
       const socket = io(socketServerEndPoint);
       socket.emit('register', location.state.email);

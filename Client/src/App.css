@@ -259,36 +259,88 @@ body {
     font-style: italic;
 }
 
-/* PROFILE PIC */
+/* EDIT PROFILE PIC */
+#editProfileContainer::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.696);
+}
+
 #editProfileContainer {
-    border: 2px solid rgb(140, 140, 140);
-    width: 20%;
-    height: auto;
+    z-index: 100;    
+    position: fixed;
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    gap: 50px;
+    align-items: center;    
     padding: 10px;
+    gap: 50px;
+    font-size: 19px;
+}
+#profilePicContainer{
+    border: 2px solid rgb(122, 177, 255);
+    width: 205px;
+    height: 205px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 50%;
+    overflow: hidden;
+}
+#profilePicContainer img {    
+    width: 100%;
+    height: 100%;    
+    object-fit: contain;
 }
 
-#editProfileContainer img {
-    width: 50%
+#editProfileContainer form {
+    border: 2px solid red;
+    width: fit-content;
+    color: white;
+    font-weight: bold;
+    font-size: 23px;
+}
+#editProfileContainer form label{
+    letter-spacing: 1px;
 }
 
-#editProfileContainer button {
+#editProfileContainer button,
+#goBack {
     padding: 10px;
     background-color: #daf8cb;
     font-weight: bold;
     letter-spacing: 1px;
     cursor: pointer;
+    margin: auto;
+}
+
+#goBack {
+    letter-spacing: .7px;
+    background-color: rgb(247, 0, 78);
+    color: white;
+    font-size: 16.7px;
+}
+
+#goBack:hover {
+    background-color: rgb(255, 21, 95);
 }
 
 #changeProfilePicForm {
-    border: 2px solid red;
+    font-size: 21px;
+    border: 1px solid grey;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 30px;
+    padding: 10px;
+    width: 100%;
+}
+
+#changeProfilePicForm span {
+    text-align: center;
 }
 
 #editProfileContainer button:hover {
@@ -444,31 +496,37 @@ body {
     }
 
     /* Conversation Component */
-    #conversationComponent{        
+    #conversationComponent {
         overflow-x: hidden;
     }
-    #profileInfo #myName{
+
+    #profileInfo #myName {
         font-size: 22.5px;
     }
-    #logout{
+
+    #logout {
         font-size: 20px;
     }
-    #friendProfileInfo{
+
+    #friendProfileInfo {
         font-size: 22.5px;
     }
+
     /* Contact Items */
-    .contactItem .contactInfo .contactName{
+    .contactItem .contactInfo .contactName {
         font-size: 22.5px;
     }
+
     /* Exit chat Option ⚔️*/
-    #exitChat {        
+    #exitChat {
         position: absolute;
         right: 5px;
         cursor: pointer;
-        font-size: 18.6px; 
-        color: rgb(171, 234, 255);        
+        font-size: 18.6px;
+        color: rgb(171, 234, 255);
     }
-    .messageDiv{
+
+    .messageDiv {
         font-size: 21px;
     }
 

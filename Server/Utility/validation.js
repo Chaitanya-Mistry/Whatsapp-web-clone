@@ -19,7 +19,7 @@ const validateCreateUser = async (req, res, next) => {
 const loginValidation = async (req, res, next) => {
     const loginSchema = yup.object().shape({
         email: yup.string().email().required(),
-        password: yup.string().required().length(6)
+        password: yup.string().required()
     });
 
     await validate(loginSchema, req.body, res, next);

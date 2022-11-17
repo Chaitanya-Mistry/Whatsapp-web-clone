@@ -16,7 +16,7 @@ import path from "path";
 import fileUpload from 'express-fileupload';
 import {fileURLToPath} from 'url';
 
-const app = new express();
+const app = express();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -101,24 +101,7 @@ async function connectDBAndStartServer() {
                 // console.log("Socket disconnected: ", socket.id)
                 delete connectedUsers[socket.id];
             })
-        });
-
-        // io.on("connection", (socket) => {
-        //     // console.log("Connected socket.io");
-
-        //     // Join Chat Event
-        //     socket.on("join chat", (channelID) => {
-        //         socket.join(channelID);
-        //         console.log("User joined room: ", channelID, "\n");
-        //         socket.to("channelID").emit("some event");
-        //     });
-
-        //     socket.on("send message", (message) => {
-        //         console.log("Message received from client : ", message);
-        //         socket.broadcast.emit('new message',message);
-        //     });
-
-        // });
+        });       
     }
 }
 

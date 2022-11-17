@@ -7,7 +7,7 @@ import jwt from "jsonwebtoken";
 const validateCreateUser = async (req, res, next) => {
     const userObjSchema = yup.object().shape({
         name: yup.string().required(),
-        password: yup.string().required(),
+        password: yup.string().required().length(6),
         email: yup.string().required(),
         profilePic: yup.string(),
     });
@@ -18,8 +18,8 @@ const validateCreateUser = async (req, res, next) => {
 // User Login
 const loginValidation = async (req, res, next) => {
     const loginSchema = yup.object().shape({
-        email: yup.string().required(),
-        password: yup.string().required()
+        email: yup.string().email().required(),
+        password: yup.string().required().length(6)
     });
 
     await validate(loginSchema, req.body, res, next);
